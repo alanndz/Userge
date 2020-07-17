@@ -1,8 +1,7 @@
 """
 Scrape the article, translate and push to telegraph
-
-Author: alanndz <alanmahmud0@gmail.com>
 """
+import re
 
 from newspaper import Article, ArticleException
 from telegraph import Telegraph
@@ -13,8 +12,11 @@ from userge import userge, Message
 
 @userge.on_cmd("wr", about={
 	'header': "Web Reader",
-	'usage': "{tr} [url] [*language]"})
+	'usage': "{tr}wr [url] [*language]"})
 async def webreader(message: Message):
+	regex: str = r'(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.' \
+		r'[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&\/\/=]*))'
+
 	tgr = Telegraph()
 	tl = Translator()
 	inp = message.input_str
