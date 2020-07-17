@@ -40,7 +40,7 @@ async def webreader(message: Message):
 
 	if lang:
 		try:
-			await message.edit("Translating Text ...")
+			await message.edit("Translating Text to `{}` ...".format(lang))
 			text = tl.translate(text, dest=lang)
 		except ValueError as err:
 			return await message.edit("Error: `{}`".format(str(err)))
