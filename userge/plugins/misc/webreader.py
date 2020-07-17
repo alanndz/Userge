@@ -42,9 +42,9 @@ async def webreader(message: Message):
 		try:
 			await message.edit("Translating Text to `{}` ...".format(lang))
 			text = tl.translate(text, dest=lang)
+			text = text.text
 		except ValueError as err:
 			return await message.edit("Error: `{}`".format(str(err)))
-		text = text.text
 
 	await message.edit("Uploading to telegraph ...")
 	tgr.create_account(short_name='13378')
