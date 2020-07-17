@@ -43,7 +43,6 @@ async def webreader(message: Message):
 			await message.edit("Translating Text to `{}` ...".format(lang))
 			text = tl.translate(text, dest=lang, src="auto")
 			tex = text.text
-			return await message.edit(tex[:4096])
 		except ValueError as err:
 			return await message.edit("Error: `{}`".format(str(err)))
 
@@ -51,7 +50,7 @@ async def webreader(message: Message):
 	tgr.create_account(short_name='13378')
 	response = tgr.create_page(
 		f"{article.title}",
-		html_content="<p>{}</p>".format(text.replace("\n", "<br>"))
+		html_content="<p>{}</p>".format(tex.replace("\n", "<br>"))
 	)
 
 	await message.edit(
