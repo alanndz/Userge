@@ -72,7 +72,9 @@ async def check_update(message: Message):
         if pull_from_repo:
             await message.edit(f'`New update found for [{branch}], Now pulling...`')
             await asyncio.sleep(1)
-            repo.git.reset('--hard', 'FETCH_HEAD')
+            repo.git.reset('--hard',
+                '{}/{}'.format(Config.UPSTREAM_REMOTE,
+                    branch))
             await CHANNEL.log(f"**UPDATED Userge from [{branch}]:\n\n📄 CHANGELOG 📄**\n\n{out}")
         elif not push_to_heroku:
             changelog_str = f'**New UPDATE available for [{branch}]:\n\n📄 CHANGELOG 📄**\n\n'
